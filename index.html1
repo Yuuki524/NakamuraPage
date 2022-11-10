@@ -8,7 +8,7 @@
         body {
             background-color: #eee6a0f5;
             color: rgb(77, 64, 64);
-            font-family: "Poppins", sans-serif;
+            font-family: "Arial", sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -17,80 +17,110 @@
             margin: 0;
         }
         h1 {
-            color: rgb(179, 131, 226);
+            color: rgb(149, 101, 197);
             font-size: 10rem;
             text-align: center;
             opacity: 0.4;
         }
+        .textbox{
+            position: relative;
+            display: block;
+            width: 500px;
+            margin-top: 50px;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #a0a0a0;
+            outline: none;
+        }
+        .addition{
+            background: #fff;
+        }
+        .calender{
+            background: #fff;
+        }
         .completed>span {
             text-decoration: line-through;
-            background-color: gray;
         }
     </style>
 </head>
 <body>
     <h1>TodoList</h1>
     <div id="todo-container">
-        Todo<input type="text" name="" id="create-input" />
-        <input type="date" />
-        <button id="create-btn">追加</button>
+        <input type="text" name="" id="create-input" class="textbox" placeholder="Todo" />
+        <input type="date" id="create-date" class="calender"/>
+        <button id="create-btn" class="addition">追加</button>
         <ul id="todo-list">
             <!-- ここに.todo-itemを追加 -->
         </ul>
     </div>
     <template id="todo-item-tmpl">
         <li class="todo-item">
+
             <!-- #todo-listに追加する元となるテンプレート -->
             <span class="todo-title"></span>
-
+            <span class="todo-date"></span>
             <input type="button" class="delete-btn" value="削除">
             <input type="button" class="complete-btn" value="完了">
         </li>
     </template>
+    
     <script>
         const EVENT_CLICK = "click";
         // 各要素の取得
         const createInput = document.querySelector("#create-input");
         const createBtn = document.querySelector("#create-btn");
         const todoList = document.querySelector("#todo-list");
-        const deadline = document.querySelector('#input[type="date"]');
+        const createDate = document.querySelector("#create-date");
+        // テンプレートを取得
         const todoItemTmpl = document.querySelector("#todo-item-tmpl");
+
+        // テンプレートのcontent（.todo-item要素）を取得
         const todoItem = todoItemTmpl.content;
+
 
         // アイテムの追加
         createBtn.addEventListener(EVENT_CLICK, () => {
         // 追加ボタンを押すとcreateTodoItem関数が実行
-        createTodoItem(createInput.value);
+            createTodoItem(createInput.value + "  :  " + createDate.value);
         });
+
+
         function createTodoItem(value) {
         // todoItemを複製
         const newItem = todoItem.cloneNode(true);
         // テンプレート内の各要素の取得
         const newTitle = newItem.querySelector(".todo-title");
+        const newDate = newItem.querySelector( ".todo-date" );
         const newdelBtn = newItem.querySelector(".delete-btn");
         const newCompBtn = newItem.querySelector(".complete-btn");
+
         // タイトルを設定
         newTitle.textContent = value;
+       
+
         // アイテムの削除
         newdelBtn.addEventListener(EVENT_CLICK, (event) => {
         // input.delete-btnの親（li.todo-item）を削除
-        deleteTodoItem(event.target.parentElement);
+            deleteTodoItem(event.target.parentElement);
         });
         // アイテムの完了
         newCompBtn.addEventListener(EVENT_CLICK, (event) => {
         // 完了のクラスを追加
-        completeTodoItem(event.target.parentElement);
+            completeTodoItem(event.target.parentElement);
         });
+
         // Todoリストの末尾に追加
         todoList.append(newItem);
         }
 
         function deleteTodoItem(item) {
-        item.remove();
+            item.remove();
         }
         function completeTodoItem(item) {
-        item.classList.toggle("completed");
+            item.classList.toggle("completed");
         }
-        </script>
-    </body>
+    </script>
+</body>
 </html>
