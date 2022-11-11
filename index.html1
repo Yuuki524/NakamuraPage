@@ -114,10 +114,13 @@
         // Todoリストの末尾に追加
         todoList.append(newItem);
         }
-
+        
+        //アイテムの削除
         function deleteTodoItem(item) {
             item.remove();
         }
+        
+        //アイテムの完了
         function completeTodoItem(item) {
             item.classList.toggle("completed");
         }
