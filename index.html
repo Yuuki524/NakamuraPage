@@ -112,35 +112,32 @@
             createTodoItem(createInput.value + "  :  " + createDate.value + "  :  " + createPriority.value);
         });
 
-
         function createTodoItem(value) {
         // todoItemを複製
-        const newItem = todoItem.cloneNode(true);
+            const newItem = todoItem.cloneNode(true);    
         // テンプレート内の各要素の取得
-        const newTitle = newItem.querySelector(".todo-title");
-        const newDate = newItem.querySelector( ".todo-date" );
-        const newdelBtn = newItem.querySelector(".delete-btn");
-        const newCompBtn = newItem.querySelector(".complete-btn");
-        const newPriority = newItem.querySelector(".priorityselect");
-
+            const newTitle = newItem.querySelector(".todo-title");
+            const newDate = newItem.querySelector( ".todo-date" );
+            const newdelBtn = newItem.querySelector(".delete-btn");
+            const newCompBtn = newItem.querySelector(".complete-btn");
+            const newPriority = newItem.querySelector(".priorityselect");
 
         // タイトルを設定
-        newTitle.textContent = value;
-       
+            newTitle.textContent = value;
 
         // アイテムの削除
-        newdelBtn.addEventListener(EVENT_CLICK, (event) => {
+            newdelBtn.addEventListener(EVENT_CLICK, (event) => {
         // input.delete-btnの親（li.todo-item）を削除
-            deleteTodoItem(event.target.parentElement);
-        });
+                deleteTodoItem(event.target.parentElement);
+            });
         // アイテムの完了
-        newCompBtn.addEventListener(EVENT_CLICK, (event) => {
+            newCompBtn.addEventListener(EVENT_CLICK, (event) => {
         // 完了のクラスを追加
-            completeTodoItem(event.target.parentElement);
-        });
+                completeTodoItem(event.target.parentElement);
+            });
 
         // Todoリストの末尾に追加
-        todoList.append(newItem);
+            todoList.append(newItem);
         }
 
         function deleteTodoItem(item) {
